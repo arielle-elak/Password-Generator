@@ -4,7 +4,7 @@ var generateBtn = document.querySelector("#generate");
 var numberArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 var lowerArr = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 var upperArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-var symbolArr = ["!", "@", "#", "%", "^", "&", "*"];
+var specialArr = ["!", "@", "#", "%", "^", "&", "*"];
 var pwLength = '';
 var pwArray = [];
 
@@ -12,7 +12,6 @@ var pwArray = [];
 var password = generatePassword();
 
 function generatePassword() {
-  const pw = pwArray.concat(symbolArr);
   console.log("Test2");
 }
 
@@ -32,11 +31,13 @@ function writePassword() {
   if (userLength >= 8 && userLength <= 128) {
       pwLength = userLength;
       alert("Your password will be " + pwLength + " characters in length.");
+      console.log("Password length: " + pwLength);
 
   // If it's not between 8 and 128
     } else if ((userLength < 8 || userLength > 128)) {
       alert("Number is out of range.");
       userLength = '';
+      console.log("Password length: Out of range");
       writePassword ();
 
   // If it's not a number and one of these other types (except for object since we want null to be possible for the cancel)
@@ -48,16 +49,50 @@ function writePassword() {
       typeof userLength === "function" ||
       typeof userLength === "string")) {
       alert("Numbers only, please.");
+      console.log("Password length: Invalid characters");
       writePassword ();
       }
 
       var numbers = confirm("Numbers: \nWould you like to use numbers (0-9)?");
       if (!numbers) {
-        alert("Numbers will not be used in your password.")
+        alert("Numbers will not be used in your password.");
+        console.log("Numbers: " + numbers);
       } else {
         pwArray = pwArray.concat(numberArr);
-        alert("Numbers will be used in your password.")
+        alert("Numbers will be used in your password.");
+        console.log("Numbers: " + numbers);
       }
+
+      var upperCase = confirm("UPPERCASE Characters: \nWould you like to use UPPERCASE characters (A-Z)?");
+      if (!upperCase) {
+        alert("UPPERCASE characters not be used in your password.");
+        console.log("Uppercase: " + upperCase);
+      } else {
+        pwArray = pwArray.concat(upperArr);
+        alert("UPPERCASE characters will be used in your password.");
+        console.log("Uppercase: " + upperCase);
+      }
+
+      var lowerCase = confirm("Lowercase Characters: \nWould you like to use lowercase characters (a-z)?");
+      if (!lowerCase) {
+        alert("Lowercase characters will not be used in your password.")
+        console.log("Lowercase: " + lowerCase);
+      } else {
+        pwArray = pwArray.concat(lowerArr);
+        alert("Lowercase characters will be used in your password.")
+        console.log("Lowercase: " + lowerCase);
+      }
+
+      var special = confirm("Special Characters: \nWould you like to use special characters (a-z)?");
+      if (!special) {
+        alert("Special characters will not be used in your password.")
+        console.log("Special: " + special);
+      } else {
+        pwArray = pwArray.concat(specialArr);
+        alert("Special characters will be used in your password.")
+        console.log("Special: " + special);
+      }
+
       console.log(pwArray);
 
 
