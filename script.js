@@ -32,13 +32,14 @@ function writePassword() {
   if (userLength >= 8 && userLength <= 128) {
       pwLength = userLength;
       alert("Your password will be " + pwLength + " characters in length.");
-      generatePassword();
 
+  // If it's not between 8 and 128
     } else if ((userLength < 8 || userLength > 128)) {
       alert("Number is out of range.");
       userLength = '';
       writePassword ();
 
+  // If it's not a number and one of these other types (except for object since we want null to be possible for the cancel)
     } else if ((isNaN(userLength)) &&
       (typeof userLength === "symbol" ||
       typeof userLength === "boolean" ||
@@ -49,6 +50,16 @@ function writePassword() {
       alert("Numbers only, please.");
       writePassword ();
       }
+
+      var numbers = confirm("Numbers: \nWould you like to use numbers (0-9)?");
+      if (!numbers) {
+        alert("Numbers will not be used in your password.")
+      } else {
+        pwArray = pwArray.concat(numberArr);
+        alert("Numbers will be used in your password.")
+      }
+      console.log(pwArray);
+
 
   // Make the content found in #password the content of the passwordText variable
   var passwordText = document.querySelector("#password");
