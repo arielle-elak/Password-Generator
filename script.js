@@ -34,7 +34,7 @@ function writePassword() {
       alert("Your password will be " + pwLength + " characters in length.");
       generatePassword();
 
-    } else if ((typeof userLength === 'number') && (userLength < 8) && (userLength > 128)) {
+    } else if ((userLength < 8 || userLength > 128)) {
       alert("Number is out of range.");
       userLength = '';
       writePassword ();
