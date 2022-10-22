@@ -39,6 +39,7 @@ function writePassword() {
   arrPassword = [];
   passwordText = [];
   pwLength = '';
+  userLength = false;
 
    // This will watch for when the var passwordText has a value assigned
   // And to link it to the area on the page that has the password id
@@ -47,10 +48,18 @@ function writePassword() {
 // Data collected from prompt window
   var userLength = window.prompt("Password Length: \nPlease enter a number between 8 and 128.");
   // If user presses Cancel, close the window and end everything
+  debugger
+
+  // IS it type? variable value?
+  /**
+   *
+   *
+   * 
+   */
   if (!userLength) {
-    userLength = false;
     window.alert("Cancelled. Closing generator.");
-    console.log("Cancelled" + userLength);
+    userLength = null;
+    console.log("Cancelled " + userLength);
     return;
 
   } else if (userLength >= 8 && userLength <= 128) {
@@ -61,8 +70,9 @@ function writePassword() {
 // If it's not between 8 and 128
   } else if ((userLength < 8 || userLength > 128)) {
     alert("Number is out of range.");
-    console.log("Password length: Out of range");
-    writePassword ();
+    console.log("Password length: Number of range");
+    userLength = null;
+    writePassword();
 
 // If it's not a number and one of these other types (except for object since we want null to be possible for the cancel)
   } else if ((isNaN(userLength)) ||
@@ -74,17 +84,14 @@ function writePassword() {
     typeof userLength === "string") {
     alert("Numbers only, please.");
     console.log("Password length: Invalid characters");
-    userLength = false;
-    writePassword ();
-    console.log("Invalid characters " + userLength);
+    console.log(userLength + " for the isNan");
+    writePassword();
 
-    } else {
-      writePassword ();
-      userLength = false;
-    }
-
-
-  console.log(userLength + "" + pwLength);
+  } else {
+    console.log("Something else happened...")
+    userLength = null;
+    return;
+  }
 
   var numbers = confirm("Numbers: \nWould you like to use numbers (0-9)?");
   if (!numbers) {
@@ -162,3 +169,30 @@ function writePassword() {
 // This listener once assigned to the id to pay attention to, will start the writePassword function
 // DO NOT MOVE FROM THE END OF THIS CODE
 generateBtn.addEventListener("click", writePassword);
+
+
+
+
+ /* function newWritePassword() {
+
+  var userLength = window.prompt("Password Length: \nPlease enter a number between 8 and 128.");
+
+  while (userLength&&((isNaN(userLength) || userLength < 8 || userLength > 128) {
+    alert("Please enter a valid number between 8 and 128.");
+    window.prompt("Password Length: \nPlease enter a number between 8 and 128.");
+  }
+
+  if (!userLength) {
+    window.alert("Cancelled. Closing generator.");
+    userLength = null;
+    console.log("Cancelled " + userLength);
+    return;
+
+  } else if (userLength >= 8 && userLength <= 128) {
+    pwLength = userLength;
+    alert("Your password will be " + pwLength + " characters in length.");
+    console.log("Password length: " + pwLength);
+  }
+}
+
+*/
