@@ -13,10 +13,23 @@ function writePassword() {
      // generatePassword will ask the questions to determine the content of the password
     function generatePassword() {
         var userLength = window.prompt("Password Length:\nPlease enter a number between 8 and 128.")
-        if (!userLength) {
-            alert("No input.")
+        console.log(userLength);
+        if (userLength === "") {
+            console.log("User length: " + userLength);
+            alert("No input. Please enter a number or hit Cancel.")
+            generatePassword();
+        } else if (isNaN(userLength)) {
+            console.log(userLength);
+            alert("Please enter a valid number or hit Cancel.");
+            generatePassword();
+        } else if (userLength >= 8 && userLength <= 128) {
+            console.log(userLength);
+            alert("Your password will be " + userLength + " characters in length.");
+            return userLength;
         }
-        return userLength
+        console.log(userLength);
+        let password = userLength;
+        return password;
     };
 
     // Make the HTML text value inside of #passoword equal to whatever the password variable equa;s
