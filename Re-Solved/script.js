@@ -1,3 +1,96 @@
+// Password Generator .js Re-vamped
+// Last Edited 10-22-2022
+
+// Array from which random characters will be selected
+var generatorArr = [];
+
+// Array for final generated password
+var passwordArr = [];
+
+var specialCharacters = [
+    '!',
+    '@',
+    '#',
+    '$',
+    '%',
+    '^',
+    '&',
+    '*'
+];
+
+var numericCharacters = [
+    '0',
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10'
+];
+
+var upperCharacters = [
+    'A',
+    'B',
+    'C',
+    'D',
+    'E',
+    'F',
+    'G',
+    'H',
+    'I',
+    'J',
+    'K',
+    'L',
+    'M',
+    'N',
+    'O',
+    'P',
+    'Q',
+    'R',
+    'S',
+    'T',
+    'U',
+    'V',
+    'W',
+    'X',
+    'Y',
+    'Z',
+];
+
+var lowerCharacters = [
+    'a',
+    'b',
+    'c',
+    'd',
+    'e',
+    'f',
+    'g',
+    'h',
+    'i',
+    'j',
+    'k',
+    'l',
+    'm',
+    'n',
+    'o',
+    'p',
+    'q',
+    'r',
+    's',
+    't',
+    'u',
+    'v',
+    'w',
+    'x',
+    'y',
+    'z',
+];
+
+
 var passwordObject = {
     "pwlength": 0,
     "special": false,
@@ -38,16 +131,16 @@ function promptPassword() {
         alert("Closing generator");
         return;
     };
+};
 
-    console.log("First phase done");
-    console.log(passwordObject);
+
 
     // Confirm on alert to select type of characters for password
     // If user does not hit OK on any options, wizard will start over
 
-    function characterOptions() {
+function characterOptions() {
 
-        var userSpecial = confirm(
+    var userSpecial = confirm(
             'Would you like to include special characters?\nClick OK for "Yes" or Cancel for "No".'
         );
 
@@ -72,37 +165,43 @@ function promptPassword() {
                 characterOptions();
         };
 
+        // If selection is true, concat the appropriate array into the generator array
         if (userSpecial === true) {
             passwordObject.special = true;
+            console.log("Special characters selected")
+            generatorArr = generatorArr.concat(specialCharacters);
         };
 
         if (userNumeric === true) {
             passwordObject.numeric = true;
+            console.log("Numeric characters selected")
+            generatorArr = generatorArr.concat(numericCharacters);
         };
 
         if (userUpper === true) {
             passwordObject.upper = true;
+            console.log("Uppercase characters selected")
+            generatorArr = generatorArr.concat(upperCharacters);
         };
 
         if (userLower === true) {
             passwordObject.lower = true;
+            console.log("Lowercase characters selected")
+            generatorArr = generatorArr.concat(lowerCharacters);
         };
-    };
-    console.log("Second phase done");
-    console.log(passwordObject);
-
+    console.log("Selections made");
+    console.log("Characters to use in generation: " + generatorArr);
 };
 
 // Generate the password based on the user prompts
 function generatePassword() {
     promptPassword();
-}
+};
 
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-
   passwordText.value = password;
 
 }
