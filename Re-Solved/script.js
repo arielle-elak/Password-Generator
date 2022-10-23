@@ -105,20 +105,22 @@ var generateBtn = document.querySelector("#generate");
 
 function promptPassword() {
 
+    // Make sure output gets turned into an integer
     let userLength = prompt(
         "Password Length:\nPlease enter a number between 8 and 128.");
 
-    if ((userLength >= 8) && (userLength <= 128)) {
+    // If user types exit and OK then the wizard will close
+    if (userLength === "exit" || userLength === "c" || userLength === "C" || userLength === "EXIT" || userLength === "Exit") {
+        console.log(userLength);
+        alert("Wizard will exit.");
+        return;
+
+    // If valid, log the value to the passwordObject and start asking about options
+    }  else if ((userLength >= 8) && (userLength <= 128)) {
         alert("Your password will be " + userLength + " characters in length.");
         passwordObject.pwlength = userLength;
         console.log(passwordObject);
         characterOptions();
-
-    } else if (isNaN(userLength) || userLength === "") {
-        alert("Please enter a valid number or press Cancel to exit.");
-        userLength = "";
-        console.log("Invalid: " + userLength);
-        promptPassword();
 
     } else if (userLength < 8 || userLength > 128) {
         alert("Password must be at least 8 but no more than 128 characters in length.")
@@ -126,10 +128,12 @@ function promptPassword() {
         console.log("Length issue: " + userLength);
         promptPassword();
 
-    } else if (userLength === "null") {
-        console.log("User cancelled: " + userLength);
-        alert("Closing generator");
-        return;
+    } else if (isNaN(userLength) || userLength === "") {
+        console.log(userLength);
+        alert("Please enter a valid number or type 'Exit' then press OK to close the generator.");
+        userLength = "";
+        console.log("Invalid: " + userLength);
+        promptPassword();
     };
 };
 
@@ -212,9 +216,15 @@ function generatePassword() {
 // Write outcome of generatePassword as the password variable
 // Sent that content to the #password HTML section on the page
 function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-  passwordText.value = password;
+    // Clear the arrays for next use if previously contained values
+    passwordArr = [];
+    generatorArr = [];
+    // Set the password variable to equal the output from the generatePassword function
+    var password = generatePassword();
+    // Select the content in the #password tag on the HTML page
+    var passwordText = document.querySelector("#password");
+    // Set the content of the #password section to the password content
+    passwordText.value = password;
 }
 
 // Add event listener to generate button
