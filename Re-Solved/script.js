@@ -19,37 +19,34 @@ function promptPassword() {
         alert("Your password will be " + userLength + " characters in length.");
         passwordObject.pwlength = userLength;
         console.log(passwordObject);
-        debugger;
-    }
+        return;
 
-    if (isNaN(userLength) || userLength === "") {
+    } else if (isNaN(userLength) || userLength === "") {
         alert("Please enter a valid number or press Cancel to exit.");
+        userLength = "";
+        console.log("Invalid: " + userLength);
         promptPassword();
-    };
 
-    if (userLength < 8 || userLength > 128) {
+    } else if (userLength < 8 || userLength > 128) {
         alert("Password must be at least 8 but no more than 128 characters in length.")
+        userLength = "";
+        console.log("Length issue: " + userLength);
         promptPassword();
-    };
 
-    if (userLength === "null") {
+    } else if (userLength === "null") {
+        console.log("User cancelled: " + userLength);
         alert("Closing generator");
         return;
     };
 
-
+    console.log("First phase done");
+    console.log(passwordObject);
 };
 
 // Generate the password based on the user prompts
 function generatePassword() {
     promptPassword();
 }
-
-
-
-
-
-
 
 // Write password to the #password input
 function writePassword() {
