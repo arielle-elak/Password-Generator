@@ -1,39 +1,62 @@
+var passwordObject = {
+    "pwlength": 0,
+    "special": false,
+    "numeric": false,
+    "upper": false,
+    "lower": false,
+}
+
+
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-// Write password to the #password input
-function writePassword() {
+function promptPassword() {
 
-    // Select the area denoted by #password as save it as the passwordText variable
-    var passwordText = document.querySelector("#password");
+    let userLength = prompt(
+        "Password Length:\nPlease enter a number between 8 and 128.");
 
-    // The value of password will be equal to what generatePassword returns
-    var password = generatePassword();
+    if ((userLength >= 8) && (userLength <= 128)) {
+        alert("Your password will be " + userLength + " characters in length.");
+        passwordObject.pwlength = userLength;
+        console.log(passwordObject);
+        debugger;
+    }
 
-     // generatePassword will ask the questions to determine the content of the password
-    function generatePassword() {
-        var userLength = window.prompt("Password Length:\nPlease enter a number between 8 and 128.")
-        console.log(userLength);
-        if (userLength === "") {
-            console.log("User length: " + userLength);
-            alert("No input. Please enter a number or hit Cancel.")
-            generatePassword();
-        } else if (isNaN(userLength)) {
-            console.log(userLength);
-            alert("Please enter a valid number or hit Cancel.");
-            generatePassword();
-        } else if (userLength >= 8 && userLength <= 128) {
-            console.log(userLength);
-            alert("Your password will be " + userLength + " characters in length.");
-            return userLength;
-        }
-        console.log(userLength);
-        let password = userLength;
-        return password;
+    if (isNaN(userLength) || userLength === "") {
+        alert("Please enter a valid number or press Cancel to exit.");
+        promptPassword();
     };
 
-    // Make the HTML text value inside of #passoword equal to whatever the password variable equa;s
-    passwordText.value = password;
+    if (userLength < 8 || userLength > 128) {
+        alert("Password must be at least 8 but no more than 128 characters in length.")
+        promptPassword();
+    };
+
+    if (userLength === "null") {
+        alert("Closing generator");
+        return;
+    };
+
+
+};
+
+// Generate the password based on the user prompts
+function generatePassword() {
+    promptPassword();
+}
+
+
+
+
+
+
+
+// Write password to the #password input
+function writePassword() {
+  var password = generatePassword();
+  var passwordText = document.querySelector("#password");
+
+  passwordText.value = password;
 
 }
 
