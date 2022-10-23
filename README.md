@@ -14,12 +14,8 @@ Please note the following functionalities:
 - Once the user has pressed OK to confirm the final choice, the password will be displayed within the Generate a Password box, overwriting the placeholder "Your Secure Password" text.
 - The password will stay on screen until a new password is fully generated.
 - If the user enters an invalid choice on the length selection screen, appropriate prompts will appear to ensure a number between 8 and 128 is entered before proceeding.
-- If the user presses Cancel from the first prompt, the generator will close.
-- If the user does not press OK for any of the options, the generator will start from the beginning
-
-## Final confirmation screen:
-
-![image](https://user-images.githubusercontent.com/73449635/184564593-cf8f318d-4321-42d5-a918-98d26cb7305e.png)
+- If the user wishes to exit the wizard, they may type different iterations of "exit" into the length prompt field and press OK.
+- If the user does not press OK for any of the secondary options, the generator will prompt the user to select at least one criteria.
 
 ## Generated Password:
 
