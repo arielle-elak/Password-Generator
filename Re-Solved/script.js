@@ -19,7 +19,7 @@ function promptPassword() {
         alert("Your password will be " + userLength + " characters in length.");
         passwordObject.pwlength = userLength;
         console.log(passwordObject);
-        return;
+        characterOptions();
 
     } else if (isNaN(userLength) || userLength === "") {
         alert("Please enter a valid number or press Cancel to exit.");
@@ -41,6 +41,56 @@ function promptPassword() {
 
     console.log("First phase done");
     console.log(passwordObject);
+
+    // Confirm on alert to select type of characters for password
+    // If user does not hit OK on any options, wizard will start over
+
+    function characterOptions() {
+
+        var userSpecial = confirm(
+            'Would you like to include special characters?\nClick OK for "Yes" or Cancel for "No".'
+        );
+
+        var userNumeric = confirm(
+            'Would you like to include numbers?\nClick OK for "Yes" or Cancel for "No".'
+        );
+
+        var userUpper = confirm(
+            'Would you like to include UPPERCASE letters?\nClick OK for "Yes" or Cancel for "No".'
+        );
+
+        var userLower = confirm(
+            'Would you like to include lowercase letters?\nClick OK for "Yes" or Cancel for "No".'
+        );
+
+        // If no characters selected, return to start of character options
+        if (userSpecial === false
+            && userNumeric === false
+            && userUpper === false
+            && userLower === false) {
+                alert("Password must have at least one character type.");
+                characterOptions();
+        };
+
+        if (userSpecial === true) {
+            passwordObject.special = true;
+        };
+
+        if (userNumeric === true) {
+            passwordObject.numeric = true;
+        };
+
+        if (userUpper === true) {
+            passwordObject.upper = true;
+        };
+
+        if (userLower === true) {
+            passwordObject.lower = true;
+        };
+    };
+    console.log("Second phase done");
+    console.log(passwordObject);
+
 };
 
 // Generate the password based on the user prompts
