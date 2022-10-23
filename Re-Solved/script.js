@@ -196,14 +196,25 @@ function characterOptions() {
 // Generate the password based on the user prompts
 function generatePassword() {
     promptPassword();
+
+    for (var i=0; i < passwordObject.pwlength; i++) {
+        // This statement will run each time the loop is executed
+        const character = generatorArr[Math.floor(Math.random() * generatorArr.length)];
+        // Add a new character to the end of the arrPassword array
+        passwordArr.push(character);
+    }
+
+    // Combine the elements of the array into a string
+    let password = passwordArr.join("");
+    return password;
 };
 
-// Write password to the #password input
+// Write outcome of generatePassword as the password variable
+// Sent that content to the #password HTML section on the page
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
   passwordText.value = password;
-
 }
 
 // Add event listener to generate button
